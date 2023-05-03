@@ -1,0 +1,185 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <title>Anime Finder</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}" />
+        <script>
+        function submitForm() {
+            const form = document.getElementById("animeForm");
+            const select = document.getElementById("menu");
+            const option = select.options[select.selectedIndex].value;
+            if (option !== "- Select A Query -") {
+                form.action = `/${option}`;
+                form.method = "POST";
+                form.submit();
+            }
+        }
+        </script>
+    </head>
+	<body>
+		<div class = "header">
+			<nav>
+				<img src="{{ url_for('static', filename='logocs.jpg') }}" alt="Anime Finder Logo">
+				<ul class="navigation-links">
+					<li><a href="/home/" class="ActiveHome">Home</a></li>
+					<li><a href="/about/" class="ActiveAbout">About The Page</a></li>
+					<li><a href="/data/"class="ActiveSources">Data Source</a></li>
+				</ul>
+			</nav>
+			<hr>
+			<div class = "info">
+				<h1>Let's Find You Some Anime To Watch!</h1>
+				<p>Welcome to our anime finder website, where you can explore a vast collection of anime titles and discover your next favorite series. Whether you're a seasoned anime fan or a newcomer to the genre, our site offers an easy-to-use interface that lets you browse, search, and filter through thousands of anime titles! Enjoy :)</p>
+				<label for = "menu"></label>
+
+				<select name="menu" id="menu" onchange="submitForm()">
+					<option value="Blank">- Select A Query -</option>
+					<option value="AnimefromScore">Finding anime from average user rating score</option>
+					<option value="AnimefromScoreRange">Finding anime from a range of average user rating score</option>
+					<option value="AnimefromNumEps">Finding anime from number of episodes</option>
+					<option value="AnimefromNumEpsRange">Finding anime from a range of episodes</option>
+					<option value="AnimefromGenre">Finding anime from genres</option>
+					<option value="GenresfromAnime">Finding genres of an anime</option>
+					<option value="ScorefromAnime">Finding the average user rating score of an anime</option>
+					<option value="NumEpsfromAnime">Finding the number of episodes of an anime</option>
+					<option value="SynopsisfromAnime">Finding the synopsis of an anime</option>
+				</select>
+
+				<div class="div1">
+					<div id="subdiv"></div>
+				</div>
+
+				<div class= "blank" id="empty" style="display:none">
+					<label for="Blank"></label>
+				</div>
+
+				<div class="genre" id="genre-input" style="display:none">
+					<form action="/AnimefromGenre" method="POST">
+						<label for="AnimefromGenre"><b>Input your desired genres: </b></label>
+						<input type="text" id="AnimefromGenre" name="AnimefromGenre">
+						<subdiv> <br><br> Make sure to seperate your genre(s) using comma(s)! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="score" id="score-input" style="display:none">
+					<form action="/AnimefromScore" method="POST">
+						<label for="AnimefromScore"><b>Input your desired average user rating score: </b></label>
+						<input type="text" id="AnimefromScore" name="AnimefromScore">
+						<subdiv> <br><br> Make sure your score is from 1.00 - 10.00! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="scoreRange" id="scoreRange-input" style="display:none">
+					<form action="/AnimefromScoreRange" method="POST">
+						<label for="AnimefromScoreRange"><b>Input your desired rating range: </b></label>
+						<input type="text" id="AnimefromScoreRange" name="AnimefromScoreRange">
+						<subdiv> <br><br> Make sure to seperate your range using a comma! Score must be from 1.00 - 10.00!</br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="episodes" id="episodes-input" style="display:none">
+					<form action="/AnimefromNumEps" method="POST">
+						<label for="AnimefromNumEps"><b>Input your desired number of episodes: </b></label>
+						<input type="text" id="AnimefromNumEps" name="AnimefromNumEps">
+						<subdiv> <br><br> Enter any whole digits that your heart desires! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="episodeRange" id="episodesRange-input" style="display:none">
+					<form action="/AnimefromNumEpsRange" method="POST">
+						<label for="AnimefromNumEpsRange"><b>Input your desired episode range: </b></label>
+						<input type="text" id="AnimefromNumEpsRange" name="AnimefromNumEpsRange">
+						<subdiv> <br><br> Make sure to seperate your range using a comma! Number of episodes from 0 - whatever! (e.g. 0,10 or 8,37) </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="title-genre" id="title-genre-input" style="display:none">
+					<form action="/GenresfromAnime" method="POST">
+						<label for="GenresfromAnime"><b>Input an anime's title whose genre(s) you want to find: </b></label>
+						<input type="text" id="GenresfromAnime" name="GenresfromAnime">
+						<subdiv> <br><br> Is the title of your anime correctly spelled...? Make sure it is! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="title-score" id="title-score-input" style="display:none">
+					<form action="/ScorefromAnime" method="POST">
+						<label for="ScorefromAnime"><b>Input an anime's title whose average user rating score you want to find: </b></label>
+						<input type="text" id="ScorefromAnime" name="ScorefromAnime">
+						<subdiv> <br><br> Is the title of your anime correctly spelled...? Make sure it is! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="title-episode" id="title-numeps-input" style="display:none">
+					<form action="/NumEpsfromAnime" method="POST">
+						<label for="NumEpsfromAnime"><b>Input an anime's title whose number of episodes you want to find: </b></label>
+						<input type="text" id="NumEpsfromAnime" name="NumEpsfromAnime">
+						<subdiv> <br><br> Is the title of your anime correctly spelled...? Make sure it is! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+
+				<div class="title-synopsis" id="title-synopsis-input" style="display:none">
+					<form action="/SynopsisfromAnime" method="POST">
+						<label for="SynopsisfromAnime"><b>Input an anime's title whose synopsis you want to find: </b></label>
+						<input type="text" id="SynopsisfromAnime" name="SynopsisfromAnime">
+						<subdiv> <br><br> Is the title of your anime correctly spelled...? Make sure it is! </br></br> </subdiv>
+						<button id="submit-btn">Submit</button>
+					</form>
+				</div>
+	
+				<script>
+					const menu = document.getElementById("menu");
+					const animefromgenre = document.getElementById("genre-input");
+					const animefromscore = document.getElementById("score-input");
+					const animefromepisodes = document.getElementById("episodes-input");
+					const genrefromanime = document.getElementById("title-genre-input");
+					const scorefromanime = document.getElementById("title-score-input");
+					const numepsfromanime = document.getElementById("title-numeps-input");
+					const synposisfromanime = document.getElementById("title-synopsis-input");
+					const AnimefromScoreRange = document.getElementById("scoreRange-input");
+					const AnimefromNumEpsRange = document.getElementById("episodesRange-input");
+
+					menu.addEventListener("change", () => {
+						animefromgenre.style.display = "none";
+						animefromscore.style.display = "none";
+						animefromepisodes.style.display = "none";
+						genrefromanime.style.display = "none";
+						scorefromanime.style.display = "none";
+						numepsfromanime.style.display = "none";
+						synposisfromanime.style.display = "none";
+						AnimefromScoreRange.style.display = "none";
+						AnimefromNumEpsRange.style.display = "none";
+					
+						if (menu.value === "AnimefromGenre") {
+							animefromgenre.style.display = "block";
+						} else if (menu.value === "AnimefromScore") {
+							animefromscore.style.display = "block";
+						} else if (menu.value === "AnimefromNumEps") {
+							animefromepisodes.style.display = "block";
+						} else if (menu.value === "GenresfromAnime") {
+							genrefromanime.style.display = "block";
+						} else if (menu.value === "ScorefromAnime") {
+							scorefromanime.style.display = "block";
+						} else if (menu.value === "NumEpsfromAnime") {
+							numepsfromanime.style.display = "block";
+						} else if (menu.value === "SynopsisfromAnime") {
+							synposisfromanime.style.display = "block";
+						} else if (menu.value === "AnimefromNumEpsRange") {
+							AnimefromNumEpsRange.style.display = "block";
+						} else if (menu.value === "AnimefromScoreRange") {
+							AnimefromScoreRange.style.display = "block";
+						}
+					});
+				</script> 
+			</hr>
+		</div>
+	</body>
+</html>

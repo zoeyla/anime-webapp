@@ -1,0 +1,26 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <title>About Page</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css') }}" />
+    </head>
+
+    <body>
+        <div class = "header">
+            <nav>
+                <img src="{{ url_for('static', filename='logocs.jpg') }}" alt="Anime Finder Logo">
+                <ul class="navigation-links">
+                    <li><a href="/home/" class="ActiveHome">Home</a></li>
+                    <li><a href="/about/" class="ActiveAbout">About The Page</a></li>
+                    <li><a href="/data/"class="ActiveSources">Data Source</a></li>
+                </ul>
+            </nav>  
+            <hr>
+            <div class = "info">
+                <h1>About The Page and Developers</h1>
+                <p>We are team K! The team members in our group include: Angel Ortiz, Zoey La, and Sameerali Sajwani. Our Anime Directory was created for CS257 at Carleton College during Winter Term 2023. We created this directory for people who are interested in finding new anime to watch based off of their needs, want to get into anime to get into the hype, or individuals who currently watch anime who just want more information about them. Anyone can use this Anime Directory.</p>
+            </div>
+        </div>  
+    </body>
+</html>

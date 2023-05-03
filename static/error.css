@@ -1,0 +1,37 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background-color: #ffffff;
+}
+
+.error{
+    width: 100%;
+}
+
+.error h1{
+    position: relative;
+    top: 30px;
+    font-size: 30px;
+    margin:0;
+    font-weight: 800;
+    text-align: center;
+}
+
+.error p{
+    position: relative;
+    top: 40px;
+    font-size: 20px;
+    margin:0;
+    text-align: center;
+}
+
+.error button {
+    position: relative;
+    top: 50px;
+    left: 42%;
+    font-size: 15px;
+    background-color: rgba(0, 255, 255, 0.283);
+    margin: 0;
+    text-align: center;
+}

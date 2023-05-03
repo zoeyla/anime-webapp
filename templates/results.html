@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Data Page</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='results.css') }}" />
+    </head>
+
+    <body>
+        <div class="header">
+            <nav>
+                <img src="{{ url_for('static', filename='logocs.jpg') }}" alt="Anime Finder Logo">
+                <ul class="navigation-links">
+                    <li><a href="/home/" class="ActiveHome">Home</a></li>
+                    <li><a href="/about/" class="ActiveAbout">About The Page</a></li>
+                    <li><a href="/data/" class="ActiveSources">Data Source</a></li>
+                </ul>
+            </nav>  
+            <hr>
+            
+            <div class="results">
+                <h1>Results!</h1>
+
+                {% if genre_for_anime %}
+                    <h3>Results for animes with the genres: {{ genre_for_anime }} are as follows: </h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Anime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anime in anime_from_genre.split(',') %}
+                                <tr>
+                                    <td> {{ anime }} </td>
+                                </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% elif num_eps_for_anime %}
+                    <h3>Results for animes with {{ num_eps_for_anime }} episodes:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Anime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anime in anime_from_num_eps.split(',') %}
+                                <tr>
+                                    <td> {{ anime }} </td>
+                                </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% elif score_for_anime %}
+                    <h3>Results for animes with the score of {{ score_for_anime }}:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Anime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anime in anime_from_score.split(',') %}
+                                <tr>
+                                    <td> {{ anime }} </td>
+                                </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% elif range_of_score_for_anime %}
+                    <h3>Results for animes with the score between {{ range_of_score_for_anime }}:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Anime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anime in anime_from_score_range.split(',') %}
+                                <tr>
+                                    <td> {{ anime }} </td>
+                                </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% elif num_of_eps_range_for_anime %}
+                    <h3>Results for animes with the number of episodes between {{ num_of_eps_range_for_anime }}:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Anime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anime in anime_from_num_of_eps_range.split(',') %}
+                                <tr>
+                                    <td> {{ anime }} </td>
+                                </tr>                        
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% elif title_for_score %}
+                    <h3>{{ title_for_score}}'s has a score of {{ score_from_title }}.</h3>
+
+                {% elif title_for_numEps %}
+                    <h3>{{ title_for_numEps }} has {{ numEps_from_title }} episode(s).</h3>
+
+                {% elif title_for_synopsis %}
+                    <h3>{{ title_for_synopsis }}'s Synopsis is:</h3>
+                    <p>{{ synopsis_from_title }}</p>
+
+                {% elif title_for_genre %}
+                    <h3>{{ title_for_genre }}'s genres are as follows: {{ genre_from_title }}</h3>
+
+                {% else %}
+                    <h3>We're sorry.</h3>
+                    <p>No results found for this search.</p>
+                {% endif %}               
+            
+            </div>
+        </div>
+    </body>
+</html>
